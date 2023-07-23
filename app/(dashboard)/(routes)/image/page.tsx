@@ -2,26 +2,19 @@
 
 import * as z from 'zod';
 import axios from 'axios';
+import Image from 'next/image';
 import { ImageIcon, Download } from 'lucide-react';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-
-import { Heading } from '@/components/heading';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 import { Form, FormControl, FormField, FormItem } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Empty } from '@/components/empty';
-import { Loader } from '@/components/loader';
-
-import { amountOptions, formSchema, resolutionOptions } from './constants';
-import { cn } from '@/lib/utils';
-import { UserAvatar } from '@/components/user-avatar';
-import { BotAvatar } from '@/components/bot-avatar';
 import { Card, CardFooter } from '@/components/ui/card';
-import Image from 'next/image';
+import { Heading } from '@/components/heading';
+import { Loader } from '@/components/loader';
 import {
   Select,
   SelectContent,
@@ -29,8 +22,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { Empty } from '@/components/empty';
+import { useProModal } from '@/hooks/use-pro-modal';
+
+import { amountOptions, formSchema, resolutionOptions } from './constants';
 
 const ImagePage = () => {
+  const proModal = useProModal();
   const router = useRouter();
   const [images, setImages] = useState<string[]>([]);
 
@@ -56,8 +54,9 @@ const ImagePage = () => {
       setImages(urls);
       form.reset();
     } catch (error: any) {
-      // TODO: Open Pro Modal
-      console.log(error);
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      }
     } finally {
       router.refresh();
     }
