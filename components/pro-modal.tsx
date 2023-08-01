@@ -1,5 +1,7 @@
 'use client';
 
+import axios from 'axios';
+import { useState } from 'react';
 import {
   Check,
   Zap,
@@ -9,9 +11,6 @@ import {
   VideoIcon,
   Code,
 } from 'lucide-react';
-
-import axios from 'axios';
-import { useState } from 'react';
 
 import {
   Dialog,
@@ -77,7 +76,7 @@ export const ProModal = () => {
 
       window.location.href = response.data.url;
     } catch (error) {
-      console.log(error);
+      console.log(error, 'STRIPE_CLIENT_ERROR');
     } finally {
       setLoading(false);
     }
@@ -114,10 +113,10 @@ export const ProModal = () => {
         </DialogHeader>
         <DialogFooter>
           <Button
+            onClick={onSubscribe}
             size="lg"
             variant="premium"
             disabled={loading}
-            onClick={onSubscribe}
             className="w-full"
           >
             Upgrade
