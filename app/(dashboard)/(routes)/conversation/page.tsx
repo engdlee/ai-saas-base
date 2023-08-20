@@ -85,6 +85,8 @@ const ConversationPage = () => {
                   <FormItem className="col-span-12 lg:col-span-10">
                     <FormControl className="p-0 m-0">
                       <Input
+                        id="conversation-prompt"
+                        aria-describedby="conversaton prompt"
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
                         placeholder="How do I calculate the radius of a circle?"

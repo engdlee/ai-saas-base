@@ -87,6 +87,8 @@ const ImagePage = () => {
                   <FormItem className="col-span-12 lg:col-span-6">
                     <FormControl className="p-0 m-0">
                       <Input
+                        id="image-prompt"
+                        aria-describedby="image prompt"
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
                         placeholder="A picture of a horse in Swiss alps"

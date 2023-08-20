@@ -75,6 +75,8 @@ const MusicPage = () => {
                   <FormItem className="col-span-12 lg:col-span-10">
                     <FormControl className="p-0 m-0">
                       <Input
+                        id="music-prompt"
+                        aria-describedby="music prompt"
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent"
                         disabled={isLoading}
                         placeholder="Piano solo"
